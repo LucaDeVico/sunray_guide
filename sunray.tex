@@ -60,7 +60,7 @@ There are currently 3 partitions on sunray.
     \item {\bf sauer} Queue for Stephan Sauer. Consists of 2 Nodes. \newline
         \code{Intel(R) Xeon(R) 12x CPU E5-2640 0 @ 2.50GHz. 128GB RAM}
 
-    \item {\bf comchem} The workstation in C317, mostly for single core calculations for compchem students.
+    \item {\bf comchem} The workstations in C317, mostly for single core calculations for Computational Chemistry students.
 
 \end{itemize}
 
@@ -82,7 +82,9 @@ It is very important, if you have jobs running a long time to check the status o
 Otherwise it is a waste of computational resources.
 Especially make sure that the resources the job will use (from the programs input file) is the same as allocated by the queue system (from the submit script). Read carefully next section.\\
 
-\subsection*{Submission scripts}
+\subsection*{Submission scripts: Dos and Donts}
+
+{\bf This section may save your life! Do not tempt fate and risk enraging the admins. Read it carefully, twice!}
 
 Template submission scripts for different programs can be found in \code{/opt/bin/submit/}. These templates cannot be modfied by the users!
 Copy-paste those you need to your own \code{bin} folder. For example, a user whose username is \code{brian} has his bin directory in \code{/home/brian/bin}.\\
@@ -118,8 +120,15 @@ MEM=1gb
 \end{verbatim}
 
 The first thing that one may want to change is the \code{PARTITION}, that is which queue to use, as previously described.
+When submitting jobs for your exercises, you should use the \code{comchem} queue, preferably.
+Remember, this queue runs on the terminals on which you are also working, thus eavy calculations will slow down the normal operation
+of the terminals.
+When submitting more intensive and lengthy jobs, you should use the \code{coms} queue. This queue is better suited also for more memory demanding
+and parallel jobs (see later)
+
 Secondly, the time allocated for the job to run. In the reported example, this job would have a maximum of 10 hours to run, not one second more.
 If you think/know that your job will require more time, you should change the variable \code{TIME} accordingly.
+Again, long calculations should run on \code{coms}, short ones (e.g. tests, exercises) on \code{comchem}.
 
 Thirdly, the number of cpus which will be allocated to the job. Do not get hungry and selfish, try to be considerate of the other users.
 However, parallel jobs (that is those running on more than 1 cpu) are usually faster than single cpu jobs, thus freeing resources earlier. You need to
@@ -128,6 +137,11 @@ check that your submission script and your input file specify the same numebr of
 
 Finally, the amount of memory is indicated by the variable \code{MEM}. Again, you should align your input and submission files.
 For example, in Gaussian the default allocated memory is 256 MB. To specify, e.g., 1 GB in the input file, you should use \code{\%mem=1GB}.
+
+{\bf It is very important that you syncronize the requested amount of memory and number of cpus between your input files and submission scripts!}
+Failing to do so will result in the wrath and rage of the cluster administrator, whom will ruthlessly kill your job (if you are lucky)!
+Remember: the computer is stupid, it only follows its directive, and does not check the content of your input files.
+It is up to you to use your brain and check that everything is correct, meaningful and coherent.
 
 \newpage
 
@@ -272,6 +286,24 @@ gaussview &
 the "\&" character makes sure the terminal is not locked to the program, so you can use it for other things as well.
 
 
+\subsection*{web browser}
+
+If you need to access the web for, e.g., check material from the Computational Chemistry Absalon page, you will need a working web browser.
+The terminals in the computer room are not connected to internet. You need first to log in to sunray itself, with X forwarding abilitated:
+
+\begin{lstlisting}
+ssh -XC sunray
+\end{lstlisting}
+
+Once on the cluster frontend, you will able able to start a web browser by typing the command:
+
+\begin{lstlisting}
+firefox &
+\end{lstlisting}
+
+Again, the \& character leaves the terminal ready to be used for other stuff. Just remember that now this terminal is on the frontend machine,
+not on the terminal.
+
 \subsection*{Inputfile preparation}
 
 Avogadro and gaussview are great at drawing the molecules, but if you want to export a structure to another program, or if you have the structure in a XYZ format, you can easily convert by using {\bf OpenBabel}.
@@ -292,6 +324,18 @@ If you are working with a lot of files that needs to be converted from XYZ to a 
 \begin{lstlisting}
 for x in *.xyz; do babel -ixyz $x -ogamin ${x%.*}.inp -xf gamess_opt; done
 \end{lstlisting}
+
+\subsection*{File editor}
+
+As previosuly mentioned, \code{vi} is a great multipurpose text editor. You can find a cheat sheet with all its main commands at the end of this guide.
+However, being based on only text can have its disadvantages. If you wish to use a simple graphical text editor on sunray, you can with this command:
+
+\begin{lstlisting}
+nedit filename &
+\end{lstlisting}
+
+This command will start the program \code{nedit} and open the file \code{filename} for editing. If such file does not exist, it will ask to create a new one.
+Menu items in \code{nedit} are basically self-explanatory and allow actions common to most text editors
 
 \newpage
 \section{Basic Work Flow}
