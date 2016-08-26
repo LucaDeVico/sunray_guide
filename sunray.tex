@@ -121,7 +121,7 @@ MEM=1gb
 
 The first thing that one may want to change is the \code{PARTITION}, that is which queue to use, as previously described.
 When submitting jobs for your exercises, you should use the \code{comchem} queue, preferably.
-Remember, this queue runs on the terminals on which you are also working, thus eavy calculations will slow down the normal operation
+Remember, this queue runs on the terminals on which you are also working, thus heavy calculations will slow down the normal operation
 of the terminals.
 When submitting more intensive and lengthy jobs, you should use the \code{coms} queue. This queue is better suited also for more memory demanding
 and parallel jobs (see later)
@@ -130,7 +130,7 @@ Secondly, the time allocated for the job to run. In the reported example, this j
 If you think/know that your job will require more time, you should change the variable \code{TIME} accordingly.
 Again, long calculations should run on \code{coms}, short ones (e.g. tests, exercises) on \code{comchem}.
 
-Thirdly, the number of cpus which will be allocated to the job. Do not get hungry and selfish, try to be considerate of the other users.
+Thirdly, the number of cpus which will be allocated to the job. Do not get hungry and selfish, try to be considerate of other users.
 However, parallel jobs (that is those running on more than 1 cpu) are usually faster than single cpu jobs, thus freeing resources earlier. You need to
 check that your submission script and your input file specify the same numebr of cpus. For example, to launch Gaussian with 2 cpus, one has to add
 \code{\%nprocshare=2} at the beginning of the input file, and use \code{NCPUS=2} in their own gaussian submission script.
@@ -227,7 +227,7 @@ to start a X server and forward the visual from sunray.
 
 
 
-\subsection{Access from Windows}
+\subsection*{Access from Windows}
 
 To access sunray from a windows machine you need to download the program PuTTY. It can be found at \url{http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html}.\\
 
@@ -236,7 +236,7 @@ A possible option is the program Xming, which can be downloaded from \url{http:/
 Moreover, Xming is quite well integrated with PuTTY. Follow the instractions on the web page.
 
 
-\subsection{Access from OS X}
+\subsection*{Access from OS X}
 
 To use the X Server on a Mac with OS X 10.8 or newer, you need to install \emph{XQuartz}.
 You can download it at \url{http://xquartz.macosforge.org/}.
@@ -286,7 +286,7 @@ gaussview &
 the "\&" character makes sure the terminal is not locked to the program, so you can use it for other things as well.
 
 
-\subsection*{web browser}
+\subsection*{Web browser}
 
 If you need to access the web for, e.g., check material from the Computational Chemistry Absalon page, you will need a working web browser.
 The terminals in the computer room are not connected to internet. You need first to log in to sunray itself, with X forwarding abilitated:
